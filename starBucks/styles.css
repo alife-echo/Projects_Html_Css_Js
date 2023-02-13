@@ -61,6 +61,10 @@ header{
   padding: 1px 10px 1px 12.5px;
   cursor: pointer;
 }
+.loupe img {
+   width: 16px;
+   height: 16px;
+}
 .navStyle form{
   display: flex;
 }
@@ -68,6 +72,10 @@ header{
   margin-left: 5rem;
   cursor: pointer;
 } 
+.menu img{
+  width: 24px;
+  height: 24px;
+}
 .apresentation{
   background-image: url(./imgs/bg.jpg);
   object-fit: cover;
@@ -336,5 +344,13 @@ footer{
   }
   header{
      margin-bottom: 5rem;
+  }
+  .loupe img{
+    width: 25px;
+    height: 25px;
+  }
+  .menu img{
+    width: 30px;
+    height: 30px;
   }
 }
