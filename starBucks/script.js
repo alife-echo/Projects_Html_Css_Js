@@ -1,19 +1,15 @@
 
 document.getElementById('btnMenu').addEventListener('click',(e)=>{
     e.preventDefault()
-    if(window.innerWidth <= 700){
-        document.getElementById('sideBar').style.width = '50%'
-    }
-    else if(window.innerWidth <= 1100){
+    if( window.innerWidth > 700 && window.innerWidth <= 1100){
         document.getElementById('sideBar').style.width = '30%'
     }
-    else if(window.innerWidth <= 360){
+    else if (window.innerWidth > 360  && window.innerWidth <= 700){
+        document.getElementById('sideBar').style.width = '50%'
+    }
+    else if (window.innerWidth <= 360){
         document.getElementById('sideBar').style.width = '100%'
-       
-    }
-    else{
-        document.getElementById('sideBar').style.width = '20%'
-    }
+    } 
     document.getElementById('shadowBar').style.width = '100%'
 })
 
