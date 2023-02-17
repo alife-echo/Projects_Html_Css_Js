@@ -412,9 +412,12 @@ footer{
   }
 }
 @media screen and (max-width:475px) {
+
   .pStyle,.titleContainerFlex{
     width: 30rem;
-  
+  }
+  .styleImgsShakes{
+    border-bottom: 2px solid var(--black);
   }
   .pStyle{
     font-size: 1.4rem;
@@ -435,4 +438,26 @@ footer{
     margin: 0px 0px 0px 1rem;
 
   }
+  .inputText{
+    width: 15rem;
+  }
+  .logo{
+    margin-left: 0;
+  }
+}
+@media screen and (max-width:420px){
+ .titleFont{
+  font-size: 6rem;
+ }
+ .paragrafStyle{
+  font-size: 1.2rem;
+ }
+}
+@media screen and (max-width:360px){
+.containerNavLogo{
+  margin: 3rem 0px 0px 0px;
+}
+.pStyle,.titleContainerFlex{
+  width: 27rem;
+}
 }

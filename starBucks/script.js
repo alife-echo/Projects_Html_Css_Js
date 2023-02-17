@@ -7,6 +7,10 @@ document.getElementById('btnMenu').addEventListener('click',(e)=>{
     else if(window.innerWidth <= 1100){
         document.getElementById('sideBar').style.width = '30%'
     }
+    else if(window.innerWidth <= 360){
+        document.getElementById('sideBar').style.width = '100%'
+       
+    }
     else{
         document.getElementById('sideBar').style.width = '20%'
     }
