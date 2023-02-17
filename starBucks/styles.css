@@ -322,10 +322,11 @@ footer{
   }
   .styleImgsShakes{
     width:23rem;
+   
   }
   .imgShakes{
     padding: 3.5rem 1px 2rem 19rem;
-
+   
   }
   .buttonStyle{
     padding: 1.5rem 3rem;
@@ -363,13 +364,14 @@ footer{
     width: 100%;
   }
   .titleFont{
-    padding: 0;
+    padding: 5rem 0px 0px 0px ;
   }
   .imgShakes{
     padding: 0;
   }
   .paragrafStyle{
-    padding: 0;
+    padding: 2.5rem 0px 0px 0px;
+    text-align: center;
   }
   .apresentation{
     display: flex;
@@ -387,6 +389,50 @@ footer{
 .containerNavLogo{
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 }
+.logo{
+  margin-right: 3rem;
+}
+}
+@media  screen and (max-width:580px) {
+ .imgShakes{
+   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+ }
+ .logo{
+  margin-left: 7rem;
+ }
+  .styleImgsShakes{
+    width: 20rem;
+    transition: 300ms;
+    border: none;
+  }
+}
+@media screen and (max-width:475px) {
+  .pStyle,.titleContainerFlex{
+    width: 30rem;
+  
+  }
+  .pStyle{
+    font-size: 1.4rem;
+  }
+  .titleContainerFlex{
+    font-size: 3rem;
+  }
+  .titleFont{
+    font-size: 8rem;
+  }
+  .paragrafStyle{
+    font-size: 1.4rem;
+  }
+  .loupe{
+    margin-right: 0;
+  }
+  .menu{
+    margin: 0px 0px 0px 1rem;
+
+  }
 }
