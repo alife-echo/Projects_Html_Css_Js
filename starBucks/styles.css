@@ -357,10 +357,19 @@ footer{
 @media screen and (max-width:950px) {
   .containerFlex{
     display: flex;
-
+    flex-direction: column;
   }
   .containerFlexColumn,.brotherContainer{
     width: 100%;
+  }
+  .titleFont{
+    padding: 0;
+  }
+  .imgShakes{
+    padding: 0;
+  }
+  .paragrafStyle{
+    padding: 0;
   }
   .apresentation{
     display: flex;
@@ -369,14 +378,15 @@ footer{
     justify-content: center;
   }
 .textElements{
-   display: flex;
-   align-items: center;
-   align-self: center;
-   justify-content: center;
-   flex-direction: column;
+   text-align: center;
 }
 .imgShakes{
   display: flex;
   flex-direction: row;
+}
+.containerNavLogo{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 }
