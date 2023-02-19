@@ -10,6 +10,7 @@ document.getElementById('btnMenu').addEventListener('click',(e)=>{
     else if (window.innerWidth <= 360){
         document.getElementById('sideBar').style.width = '100%'
     } 
+    document.getElementById('sideBar').style.width = '25%'
     document.getElementById('shadowBar').style.width = '100%'
 })
 
