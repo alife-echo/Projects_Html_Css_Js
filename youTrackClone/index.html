@@ -7,18 +7,49 @@
     <title>YouTrack</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="icon" type="image/png" href="https://aps-si.youtrack.cloud/static/apple-touch-icon-60x60.png?b7eac177b3ea698b413f4cb4a18e39a9?b7eac177b3ea698b413f4cb4a18e39a9" sizes="57x57">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <main>
         <div class="search">
              <input	type="text" id="inSearch"class='inputSearch' placeholder="Filtrar cartões no board">
-             <img src="./imgs/search.png" width="25" height="25" alt="lupa pesquisar" class="loupe">
+             <img src="./imgs/search.png" width="20" height="20" alt="lupa pesquisar" class="loupe">
         </div>
         <div class="containerCollumns">
-          <section class="open row"></section>
-          <section class="progress row"></section>
-          <section class="toVerify row"></section>
-          <section class="concluded row"></section>
+          <section class="open row">
+            <div class="rowTitles"> 
+               < Aberta
+            </div>
+            <div class="boxTodo">
+                
+           </div>
+          </section>
+          <section class="progress row">
+            <div class="rowTitles"> 
+                <  Em andamento
+            </div>
+            <div class="boxTodo">
+                 
+            </div>
+          </section>
+          <section class="toVerify row">
+            <div class="rowTitles"> 
+                <  Para Verificar
+            </div>
+            <div class="boxTodo">
+                
+           </div>
+          </section>
+          <section class="concluded row">
+            <div class="rowTitles"> 
+                <  Concluída
+            </div>
+            <div class="boxTodo">
+                
+           </div>
+          </section>
         </div>
     </main>
     <script src="./script.js"></script>
