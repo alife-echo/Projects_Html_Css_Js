@@ -98,3 +98,28 @@ box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
     margin-top: 5rem;
    border-left: none;
 }
+.boxTodo img{
+    margin-left: 1rem;
+    cursor: pointer;
+}
+.styleSpan{
+     color: var(--placeHolderColor);
+     font-family: 'Inter', sans-serif;
+     font-weight: 400;
+     font-size: 1.3rem;
+     margin-left: 0.5rem;
+     cursor: pointer;
+     transition: 300ms all ease;
+     display: none;
+}
+.styleSpan:hover{
+     color: var(--hoverTitles);
+     transition: 300ms all ease;
+}
+.styleButton{
+    background-color: var(--backGroundColorInitial);
+    border: transparent;
+}
+.row:hover .styleSpan {
+    display: inline-block;
+  }
