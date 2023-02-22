@@ -1,0 +1,9 @@
+.row:hover .styleSpan {
+  display: inline-block;           ---> quando passar o mouse na linha , faça algo no styleSpan , mostre o "adicionar cartão"
+}
+
+  elements[i].addEventListener('mouseover', (e) => { 
+    let span = e.target.querySelector('.styleSpan');   --> pegar apenas  o elemento que esta sofrendo o alvo do evento
+    span.classList.add('show'); ---> adicionar uma classe nele show
+  });
+  

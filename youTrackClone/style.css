@@ -56,8 +56,8 @@ main{
     transition: 500ms;
     border: 1px solid var(--focusButtonColor);
     -webkit-box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
--moz-box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
-box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
+    -moz-box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
+    box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
 }
 
 .loupe{
@@ -97,6 +97,7 @@ box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
     border-top: none;
     margin-top: 5rem;
    border-left: none;
+   border-spacing: 0px 1rem;
 }
 .boxTodo img{
     margin-left: 1rem;
@@ -122,4 +123,71 @@ box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
 }
 .row:hover .styleSpan {
     display: inline-block;
+    
   }
+.modal{
+    width: 45rem;
+    height: 35rem;
+    background-color: var(--modalBackground);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border-radius: 10px;
+    transition: 300ms all ease;
+    display: none;
+}
+.formModal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.inputsStyle{
+    background-color: var(--backGroundColorInitial);
+    border: 0.1px solid var(--placeHolderColor) ;
+    border: transparent;
+    outline: none;
+    margin-top: 2.5rem;
+    width: 90%;
+    align-self: center;
+    font-size: 1.9rem;
+    padding: 0.8rem;
+    color: var(--placeHolderColor);
+}
+
+.areaStyle{
+    height: 15rem;
+}
+.stylesContainerButton{
+    align-self: center;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+}
+.buttonStyle{
+    width: 80%;
+    padding: 0.8rem;
+    background-color: var(--backGroundColorInitial);
+    border: 1px solid var(--hoverTitles);
+    outline: none;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    color: var(--placeHolderColor);
+    transition: 200ms;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+}
+.buttonStyle:hover{
+    transition: 200ms;
+    border: 1px solid var(--focusButtonColor);
+    -webkit-box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
+    -moz-box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
+    box-shadow: 2px 4px 36px -6px rgba(17,90,149,0.81);
+}
+.showModal{
+    display: block;
+    transition: 300ms;
+}
