@@ -130,8 +130,8 @@ main{
     height: 35rem;
     background-color: var(--modalBackground);
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 25%;
+    left:35%;
     transform: translate(-50%,-50%);
     border-radius: 10px;
     transition: 300ms all ease;
@@ -154,6 +154,7 @@ main{
     font-size: 1.9rem;
     padding: 0.8rem;
     color: var(--placeHolderColor);
+ 
 }
 
 .areaStyle{
@@ -189,5 +190,29 @@ main{
 }
 .showModal{
     display: block;
-    transition: 300ms;
 }
+.flip-vertical-right {
+	-webkit-animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) reverse both;
+	        animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) reverse both;
+}
+
+@-webkit-keyframes flip-vertical-right {
+    0% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+    }
+    100% {
+      -webkit-transform: rotateY(180deg);
+              transform: rotateY(180deg);
+    }
+  }
+  @keyframes flip-vertical-right {
+    0% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+    }
+    100% {
+      -webkit-transform: rotateY(180deg);
+              transform: rotateY(180deg);
+    }
+  }
