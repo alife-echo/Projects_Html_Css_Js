@@ -66,9 +66,8 @@ main{
 }
 .containerCollumns{
     display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin-top: 5rem;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .row{
     width: 25%;
@@ -92,12 +91,13 @@ main{
 
 .boxTodo{
     width: 100%;
-    height: 10rem;
+    height: 100%;
+    min-height: 10rem;
     border: 0.1px solid var(--placeHolderColor) ;
     border-top: none;
     margin-top: 5rem;
-   border-left: none;
-   border-spacing: 0px 1rem;
+    border-spacing: 0px 1rem;
+    flex-wrap: wrap;
 }
 .boxTodo img{
     margin-left: 1rem;
@@ -215,4 +215,14 @@ main{
       -webkit-transform: rotateY(180deg);
               transform: rotateY(180deg);
     }
+  }
+  .contentTodo{
+    width: 90%;
+    min-height: 6rem;
+    height: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    border: 1px solid var(--placeHolderColor);
+    border-radius: 3px;
   }
