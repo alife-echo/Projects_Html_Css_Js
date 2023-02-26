@@ -59,7 +59,13 @@ function createTodo(titleTask,taskTextArea,receiveBox){
 document.getElementById('btnAdd').addEventListener('click',(e)=>{
   let inTaskTitleText = document.getElementById("inTaskTitle").value
   let inTaskTextArea = document.getElementById('inTaskArea').value
-  createTodo(inTaskTitleText,inTaskTextArea,divStage)
+  if(inTaskTextArea == '' || inTaskTitleText == ''){
+     alert('Informe os dados corretamente')
+  }
+  else{
+    createTodo(inTaskTitleText,inTaskTextArea,divStage)
+  }
+
 })
 console.log(document.querySelector('.open,.progress,.toVerify,.concluded:last-of-type').offsetHeight)
 /* 
