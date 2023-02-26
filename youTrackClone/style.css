@@ -16,6 +16,7 @@ html{
      --modalBackground : #111314;
      --focusButtonColor:#115A95;
      --placeHolderColor:#6F7F89;
+     --colorTitleTodo : #80929D;
 }
 :root{
     font-size: 62.5%;
@@ -65,9 +66,10 @@ main{
     cursor: pointer;
 }
 .containerCollumns{
+    margin-top: 2rem;
     display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+
 }
 .row{
     width: 25%;
@@ -97,7 +99,7 @@ main{
     border-top: none;
     margin-top: 5rem;
     border-spacing: 0px 1rem;
-    flex-wrap: wrap;
+
 }
 .boxTodo img{
     margin-left: 1rem;
@@ -225,4 +227,23 @@ main{
     margin-left: 2rem;
     border: 1px solid var(--placeHolderColor);
     border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    justify-content: space-between;
+  }
+  summary{
+    color: var(--colorTitleTodo);
+    font-size: 1.9rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+  }
+  p{
+    color: var(--colorTitles);
+    margin-top: 0.3rem;
+    margin-left: 1rem;
+    font-size: 1.7rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
   }
