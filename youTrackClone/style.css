@@ -98,6 +98,8 @@ main{
     border: 0.1px solid var(--placeHolderColor) ;
     border-top: none;
     margin-top: 5rem;
+   
+  
 }
 .styleSpan{
      color: var(--placeHolderColor);

@@ -1,11 +1,13 @@
 
-let btnAdd = document.querySelectorAll('.styleButton')
+let btnAddStyle = document.querySelectorAll('.styleButton')
 let titleTaskInput = document.getElementById('inTaskTitle')
 let taskAreaInput = document.getElementById('inTaskArea')
 let modal = document.querySelector('.modal')
+let copyTrash = ''
 let divStage = ''
-for(let i =0; i<btnAdd.length;i++){
-    btnAdd[i].addEventListener('click',()=>{
+
+for(let i =0; i<btnAddStyle.length;i++){
+  btnAddStyle[i].addEventListener('click',()=>{
          let modal = document.querySelector('.modal')
          modal.classList.add('showModal')
     })
@@ -16,17 +18,33 @@ document.getElementById('btnCancelTask').addEventListener('click',()=>{
     taskAreaInput.value = ''
 })
 
-let addTaskButtons = document.querySelectorAll('.styleButton');
-addTaskButtons.forEach(function(button) {
+btnAddStyle.forEach(function(button) {
   button.addEventListener('click', function(event) {
 
-    let parentDiv = (event.target.parentNode).parentNode;
+    let parentDiv = event.target.parentNode.parentNode;
 
     let parentClassName = parentDiv.classList[0];
-    divStage = parentClassName
+    if(parentClassName == 'row'){
+       console.log('stop')
+    }
+    else{
+      divStage = parentClassName
+    }
+    
     console.log(parentClassName);
   });
 });
+document.getElementById('btnAdd').addEventListener('click',()=>{
+  let inTaskTitleText = document.getElementById("inTaskTitle").value
+  let inTaskTextArea = document.getElementById('inTaskArea').value
+  if(inTaskTextArea == '' || inTaskTitleText == ''){
+     alert('Informe os dados corretamente')
+  }
+  else{
+    createTodo(inTaskTitleText,inTaskTextArea,divStage)
+ 
+  }
+})
 function createTodo(titleTask,taskTextArea,receiveBox){
     let createClass = '.' + receiveBox
     let containerTodo = document.querySelector(createClass)
@@ -40,6 +58,8 @@ function createTodo(titleTask,taskTextArea,receiveBox){
     let nodeTextArea = document.createTextNode(taskTextArea)
     input.classList.add('styleButton')
     div.classList.add('contentTodo')
+    input.id = 'btnTrash'
+    copyTrash = input
     img.src = './imgs/trash.png'
     img.style.width = '18px'
     img.style.height = '18px'
@@ -54,20 +74,20 @@ function createTodo(titleTask,taskTextArea,receiveBox){
     modal.classList.remove('showModal')
     titleTaskInput.value = ''
     taskAreaInput.value = ''   
+    deleteTodo(input)
 }
 
-document.getElementById('btnAdd').addEventListener('click',(e)=>{
-  let inTaskTitleText = document.getElementById("inTaskTitle").value
-  let inTaskTextArea = document.getElementById('inTaskArea').value
-  if(inTaskTextArea == '' || inTaskTitleText == ''){
-     alert('Informe os dados corretamente')
+function  deleteTodo( element) {
+  let elemetTrash =  document.querySelectorAll('#' + element.id)
+  for(let i = 0; i<elemetTrash.length;i++){
+     elemetTrash[i].addEventListener('click',(e)=>{
+      e.stopPropagation()
+       e.target.parentNode.parentNode.remove()
+     })
   }
-  else{
-    createTodo(inTaskTitleText,inTaskTextArea,divStage)
-  }
+}
 
-})
-console.log(document.querySelector('.open,.progress,.toVerify,.concluded:last-of-type').offsetHeight)
+
 /* 
 var divsBoxTodo = document.querySelectorAll('.boxTodo');
 
