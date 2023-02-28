@@ -5,7 +5,6 @@ let taskAreaInput = document.getElementById('inTaskArea')
 let modal = document.querySelector('.modal')
 let copyTrash = ''
 let divStage = ''
-
 for(let i =0; i<btnAddStyle.length;i++){
   btnAddStyle[i].addEventListener('click',()=>{
          let modal = document.querySelector('.modal')
@@ -18,22 +17,18 @@ document.getElementById('btnCancelTask').addEventListener('click',()=>{
     taskAreaInput.value = ''
 })
 
-btnAddStyle.forEach(function(button) {
-  button.addEventListener('click', function(event) {
-
-    let parentDiv = event.target.parentNode.parentNode;
-
-    let parentClassName = parentDiv.classList[0];
-    if(parentClassName == 'row'){
-       console.log('stop')
+for(let i = 0; i<btnAddStyle.length;i++){
+  btnAddStyle[i].addEventListener('click', (e) => {
+    let parentDiv = e.target.parentElement.parentElement;
+    if(parentDiv.classList[0] === 'row'){
+      divStage =  parentDiv.children[1].classList[0]
     }
     else{
+      let parentClassName = parentDiv.classList[0];
       divStage = parentClassName
-    }
-    
-    console.log(parentClassName);
+    }    
   });
-});
+}
 document.getElementById('btnAdd').addEventListener('click',()=>{
   let inTaskTitleText = document.getElementById("inTaskTitle").value
   let inTaskTextArea = document.getElementById('inTaskArea').value
