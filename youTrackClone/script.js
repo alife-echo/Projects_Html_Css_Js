@@ -2,6 +2,7 @@
 let btnAddStyle = document.querySelectorAll('.styleButton')
 let titleTaskInput = document.getElementById('inTaskTitle')
 let taskAreaInput = document.getElementById('inTaskArea')
+let stageElements = document.querySelectorAll('.open, .progress, .toVerify, .concluded');
 let modal = document.querySelector('.modal')
 let copyTrash = ''
 let divStage = ''
@@ -37,6 +38,7 @@ document.getElementById('btnAdd').addEventListener('click',()=>{
   }
   else{
     createTodo(inTaskTitleText,inTaskTextArea,divStage)
+    adjustElementsHeight()
  
   }
 })
@@ -72,32 +74,33 @@ function createTodo(titleTask,taskTextArea,receiveBox){
     deleteTodo(input)
 }
 
-function  deleteTodo( element) {
-  let elemetTrash =  document.querySelectorAll('#' + element.id)
-  for(let i = 0; i<elemetTrash.length;i++){
-     elemetTrash[i].addEventListener('click',(e)=>{
-      e.stopPropagation()
-       e.target.parentNode.parentNode.remove()
-     })
+function deleteTodo (element) {
+  let elementTrash = document.querySelectorAll('#' + element.id)
+  for (let i = 0; i < elementTrash.length; i++) {
+    elementTrash[i].addEventListener('click', (e) => {
+      e.stopImmediatePropagation()
+      let contentTodo = e.target.closest('.contentTodo')
+      if (contentTodo) {
+        contentTodo.remove()
+        resetAdjust()
+      }
+    })
   }
 }
 
-
-/* 
-var divsBoxTodo = document.querySelectorAll('.boxTodo');
-
-// função para atualizar a altura de todas as divs boxTodo
-function atualizarAlturaBoxTodo() {
-  // obtém a altura do último contentTodo adicionado
-  var alturaContentTodo = document.querySelector('.contentTodo:last-of-type').offsetHeight;
-
-  // atualiza a altura de todas as divs boxTodo com a altura do último contentTodo adicionado
-  for (var i = 0; i < divsBoxTodo.length; i++) {
-    divsBoxTodo[i].style.height = alturaContentTodo + 'px';
-  }
+function adjustElementsHeight() {
+  stageElements.forEach(item => {
+    let observer = new MutationObserver(() => {
+      stageElements.forEach(x => {
+        x.style.transition = 'min-height 0.3s ease-in-out';
+        x.style.minHeight = item.scrollHeight + 'px';
+      });
+    });
+    observer.observe(item, { childList: true, subtree: true });
+  });
 }
 
-// adiciona um evento onchange para detectar quando um novo contentTodo é adicionado
-var inputContentTodo = document.querySelector('#inputContentTodo');
-inputContentTodo.addEventListener('change', atualizarAlturaBoxTodo);
-*/
+
+
+//for(let i =0; i<x.length;i++){x[i].style.minHeight = '20rem'} codigo de adptação
+
