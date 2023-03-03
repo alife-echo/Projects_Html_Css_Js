@@ -217,7 +217,7 @@ main{
     }
   }
   .contentTodo{
-    width: 90%;
+    width: 35rem;
     min-height: 6rem;
     height: 100%;
     margin-top: 1rem;
@@ -229,14 +229,18 @@ main{
     align-items: center;
     padding: 1rem;
     justify-content: space-between;
+    
   }
+
   summary{
     color: var(--colorTitleTodo);
     font-size: 1.9rem;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     cursor: pointer;
+    word-break: break-all;
   }
+
  
   p{
     color: var(--colorTitles);
@@ -245,6 +249,8 @@ main{
     font-size: 1.7rem;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
+    word-break: break-all;
+  
   }
   .verticalColor{
     width:1px;

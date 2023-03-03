@@ -82,7 +82,7 @@ function deleteTodo (element) {
       let contentTodo = e.target.closest('.contentTodo')
       if (contentTodo) {
         contentTodo.remove()
-        resetAdjust()
+        
       }
     })
   }
