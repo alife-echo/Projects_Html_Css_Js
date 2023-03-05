@@ -39,7 +39,7 @@ document.getElementById('btnAdd').addEventListener('click',()=>{
   else{
     createTodo(inTaskTitleText,inTaskTextArea,divStage)
     adjustElementsHeight()
- 
+
   }
 })
 function createTodo(titleTask,taskTextArea,receiveBox){
@@ -82,25 +82,40 @@ function deleteTodo (element) {
       let contentTodo = e.target.closest('.contentTodo')
       if (contentTodo) {
         contentTodo.remove()
-        
+        backAdjustHeight()
       }
     })
+   
   }
+
 }
 
-function adjustElementsHeight() {
-  stageElements.forEach(item => {
-    let observer = new MutationObserver(() => {
-      stageElements.forEach(x => {
-        x.style.transition = 'min-height 0.3s ease-in-out';
-        x.style.minHeight = item.scrollHeight + 'px';
+
+
+  function adjustElementsHeight() {
+    stageElements.forEach(item => {
+      let observer = new MutationObserver(() => {
+        stageElements.forEach(x => {
+          x.style.transition = 'min-height 0.3s ease-in-out';
+          x.style.minHeight = item.scrollHeight + 'px';
+        });
       });
+      observer.observe(item, { childList: true, subtree: true });
     });
-    observer.observe(item, { childList: true, subtree: true });
-  });
+  }
+function backAdjustHeight () {
+      stageElements.forEach(item => {
+         let observer = new MutationObserver(()=> {
+           stageElements.forEach (x =>{
+            
+              x.style.transition = 'min-height 0.3s ease-in-out';
+              x.style.minHeight = '10rem';
+             
+           })
+         })
+         observer.observe(item,{childList:true,subtree:true})
+      })
 }
-
-
 
 //for(let i =0; i<x.length;i++){x[i].style.minHeight = '20rem'} codigo de adptação
 
