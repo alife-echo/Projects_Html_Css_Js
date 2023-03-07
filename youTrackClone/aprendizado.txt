@@ -6,4 +6,24 @@
     let span = e.target.querySelector('.styleSpan');   --> pegar apenas  o elemento que esta sofrendo o alvo do evento
     span.classList.add('show'); ---> adicionar uma classe nele show
   });
-  
+   //filter
+document.getElementById('inSearch').addEventListener('input',(e)=>{
+      if(e.target.value != ''){  ---> se o input não estiver vazio, faça isso
+        for(titles of  titlesSumary){ ----> para todos os sumary do array contendo os sumarys
+          let textList = titles.textContent.toLowerCase() ---> pega todos os titulo do sumary e deixe em caixa baixa
+          let parent = titles.parentNode.parentNode ---> pegue o pai do pai do titulo que é o contentTodo
+          if(!textList.includes(e.target.value.toLowerCase())){  --> se na lista de titulos não estiver incluido o que foi digitado no input
+             parent.style.display = 'none'  --> suma com todos os contentTodo 
+          }
+          else{
+            parent.style.display = 'flex' se não, mostre todos os contentTodo que foram especificados no input
+          }
+        }
+      }
+      else{
+         for(titles of titlesSumary){ ---> caso o input fique vazio
+           let parent = titles.parentNode.parentNode ---> pegue os contentTodo
+           parent.style.display = 'flex' ---> faça voltarem a tela
+         }
+      }
+})
