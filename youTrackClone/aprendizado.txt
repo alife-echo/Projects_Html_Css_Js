@@ -37,7 +37,7 @@ function deleteTodo (element) {
   for(buttonsTrash of elementTrash){ //para todos os botões de excluir
     buttonsTrash.addEventListener('click', (e) => { // aplique uma ação nos botões
       e.stopImmediatePropagation()  // pare a propagação no clique dos botões excluir, pegue apenas o botão que sofre o alvo do evento
-      let contentTodo = e.target.closest('.contentTodo')  // desse botão que foi clicado pegue o elemento ou o ancestral mais proximo que envolve esse botão 
+      let contentTodo = e.target.closest('.contentTodo')  // desse botão que foi clicado pegue o elemento pai mais proximo de e.target que tenha a classe .cotentTodo
       if (contentTodo) { // se esse elemento existir
         contentTodo.remove() //exclua ele
         backAdjustHeight() // ajuste a altura da box
@@ -46,3 +46,6 @@ function deleteTodo (element) {
   }
 
 }
+
+
+No trecho de código em questão, e.target.closest('.contentTodo') é usado para encontrar o elemento pai mais próximo de e.target que tenha a classe .contentTodo. Isso significa que o código está procurando o elemento pai mais próximo que tenha a classe .contentTodo e, em seguida, removendo-o do DOM usando o método remove().
