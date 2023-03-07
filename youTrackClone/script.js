@@ -134,7 +134,7 @@ document.getElementById('inSearch').addEventListener('input',(e)=>{
       if(e.target.value != ''){
         for(titles of  titlesSumary){
           let textList = titles.textContent.toLowerCase()
-          let parent = titles.parentNode.parentNode
+          let parent = titles.closest('.contentTodo')
           if(!textList.includes(e.target.value.toLowerCase())){ 
              parent.style.display = 'none'
           }
@@ -145,7 +145,7 @@ document.getElementById('inSearch').addEventListener('input',(e)=>{
       }
       else{
          for(titles of titlesSumary){
-           let parent = titles.parentNode.parentNode
+           let parent = titles.closest('.contentTodo')
            parent.style.display = 'flex'
          }
       }
