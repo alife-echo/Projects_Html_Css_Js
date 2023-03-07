@@ -4,22 +4,25 @@ let titleTaskInput = document.getElementById('inTaskTitle')
 let taskAreaInput = document.getElementById('inTaskArea')
 let stageElements = document.querySelectorAll('.open, .progress, .toVerify, .concluded');
 let modal = document.querySelector('.modal')
+let titlesSumary = []
 let copyTrash = ''
 let divStage = ''
-for(let i =0; i<btnAddStyle.length;i++){
-  btnAddStyle[i].addEventListener('click',()=>{
-         let modal = document.querySelector('.modal')
-         modal.classList.add('showModal')
-    })
-}
+//open modal
+for(spanAddCard of btnAddStyle){
+    spanAddCard.addEventListener('click',()=>{
+      let modal = document.querySelector('.modal')
+      modal.classList.add('showModal')
+ })
+  }
+// close modal
 document.getElementById('btnCancelTask').addEventListener('click',()=>{ 
     modal.classList.remove('showModal')
     titleTaskInput.value = ''
     taskAreaInput.value = ''
 })
-
-for(let i = 0; i<btnAddStyle.length;i++){
-  btnAddStyle[i].addEventListener('click', (e) => {
+//fixed bug parentParent
+for(fixedBugSpanCard of btnAddStyle){
+  fixedBugSpanCard.addEventListener('click', (e) => {
     let parentDiv = e.target.parentElement.parentElement;
     if(parentDiv.classList[0] === 'row'){
       divStage =  parentDiv.children[1].classList[0]
@@ -30,6 +33,7 @@ for(let i = 0; i<btnAddStyle.length;i++){
     }    
   });
 }
+//validate inputs modal and call createTodo
 document.getElementById('btnAdd').addEventListener('click',()=>{
   let inTaskTitleText = document.getElementById("inTaskTitle").value
   let inTaskTextArea = document.getElementById('inTaskArea').value
@@ -42,6 +46,7 @@ document.getElementById('btnAdd').addEventListener('click',()=>{
 
   }
 })
+//create todo
 function createTodo(titleTask,taskTextArea,receiveBox){
     let createClass = '.' + receiveBox
     let containerTodo = document.querySelector(createClass)
@@ -64,6 +69,7 @@ function createTodo(titleTask,taskTextArea,receiveBox){
     input.appendChild(img)
     p.appendChild(nodeTextArea)
     sumary.appendChild(nodeTextTitle)
+    captureTitle(sumary)
     details.appendChild(sumary)
     details.appendChild(p)
     div.appendChild(details)
@@ -72,8 +78,9 @@ function createTodo(titleTask,taskTextArea,receiveBox){
     titleTaskInput.value = ''
     taskAreaInput.value = ''   
     deleteTodo(input)
+   
 }
-
+//delete todo specif
 function deleteTodo (element) {
   let elementTrash = document.querySelectorAll('#' + element.id)
   for (let i = 0; i < elementTrash.length; i++) {
@@ -92,7 +99,8 @@ function deleteTodo (element) {
 
 
 
-  function adjustElementsHeight() {
+//adjustBoxTodo
+function adjustElementsHeight() {
     stageElements.forEach(item => {
       let observer = new MutationObserver(() => {
         stageElements.forEach(x => {
@@ -103,11 +111,12 @@ function deleteTodo (element) {
       observer.observe(item, { childList: true, subtree: true });
     });
   }
+//adjustBoxTodoDown
 function backAdjustHeight () {
       stageElements.forEach(item => {
          let observer = new MutationObserver(()=> {
            stageElements.forEach (x =>{
-            
+              
               x.style.transition = 'min-height 0.3s ease-in-out';
               x.style.minHeight = '10rem';
              
@@ -117,5 +126,30 @@ function backAdjustHeight () {
       })
 }
 
-//for(let i =0; i<x.length;i++){x[i].style.minHeight = '20rem'} codigo de adptação
+//storage elements title
+function captureTitle(elementTile){
+    titlesSumary.push(elementTile)
+}
+ //filter
+document.getElementById('inSearch').addEventListener('input',(e)=>{
+      if(e.target.value != ''){
+        for(titles of  titlesSumary){
+          let textList = titles.textContent.toLowerCase()
+          let parent = titles.parentNode.parentNode
+          if(!textList.includes(e.target.value.toLowerCase())){ 
+             parent.style.display = 'none'
+          }
+          else{
+            parent.style.display = 'flex'
+          }
+        }
+      }
+      else{
+         for(titles of titlesSumary){
+           let parent = titles.parentNode.parentNode
+           parent.style.display = 'flex'
+         }
+      }
+})
+
 
