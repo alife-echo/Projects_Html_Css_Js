@@ -6,6 +6,9 @@
     let span = e.target.querySelector('.styleSpan');   --> pegar apenas  o elemento que esta sofrendo o alvo do evento
     span.classList.add('show'); ---> adicionar uma classe nele show
   });
+
+
+
    //filter
 document.getElementById('inSearch').addEventListener('input',(e)=>{
       if(e.target.value != ''){  ---> se o input não estiver vazio, faça isso
@@ -27,3 +30,19 @@ document.getElementById('inSearch').addEventListener('input',(e)=>{
          }
       }
 })
+
+
+function deleteTodo (element) {
+  let elementTrash = document.querySelectorAll('#' + element.id)
+  for(buttonsTrash of elementTrash){ //para todos os botões de excluir
+    buttonsTrash.addEventListener('click', (e) => { // aplique uma ação nos botões
+      e.stopImmediatePropagation()  // pare a propagação no clique dos botões excluir, pegue apenas o botão que sofre o alvo do evento
+      let contentTodo = e.target.closest('.contentTodo')  // desse botão que foi clicado pegue o elemento ou o ancestral mais proximo que envolve esse botão 
+      if (contentTodo) { // se esse elemento existir
+        contentTodo.remove() //exclua ele
+        backAdjustHeight() // ajuste a altura da box
+      }
+    })
+  }
+
+}

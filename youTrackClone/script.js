@@ -83,16 +83,15 @@ function createTodo(titleTask,taskTextArea,receiveBox){
 //delete todo specif
 function deleteTodo (element) {
   let elementTrash = document.querySelectorAll('#' + element.id)
-  for (let i = 0; i < elementTrash.length; i++) {
-    elementTrash[i].addEventListener('click', (e) => {
-      e.stopImmediatePropagation()
-      let contentTodo = e.target.closest('.contentTodo')
-      if (contentTodo) {
-        contentTodo.remove()
-        backAdjustHeight()
+  for(buttonsTrash of elementTrash){ //para todos os botões de excluir
+    buttonsTrash.addEventListener('click', (e) => { // aplique uma ação nos botões
+      e.stopImmediatePropagation()  // pare a propagação no clique dos botões excluir, pegue apenas o botão que sofre o alvo do evento
+      let contentTodo = e.target.closest('.contentTodo')  // desse botão que foi clicado pegue o elemento ou o ancestral mais proximo que envolve esse botão 
+      if (contentTodo) { // se esse elemento existir
+        contentTodo.remove() //exclua ele
+        backAdjustHeight() // ajuste a altura da box
       }
     })
-   
   }
 
 }
