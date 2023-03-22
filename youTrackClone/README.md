@@ -1,1 +1,1 @@
-![Projeto StarBucks](./imgs/model.png)
+![YouTrackClone](./imgs/model.png)
