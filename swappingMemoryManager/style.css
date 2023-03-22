@@ -32,6 +32,13 @@ html{
     height: 6.1rem;
     border: 1px solid wheat;
     flex-direction: column;
+    transition: 0.5s;
+}
+.boxProcess:hover{
+    transition: 0.5s;
+    transform: scale(1.3);
+    z-index: 999;
+    cursor: pointer;
 }
 .headerBoxProcess{
     background-color: #121214;
@@ -47,3 +54,5 @@ html{
     display: flex;
     flex-wrap: wrap;
 }
+
+  
