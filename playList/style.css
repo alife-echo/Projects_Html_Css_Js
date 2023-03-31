@@ -1,0 +1,31 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+html{
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+    --whiteGray : #FEEDED;
+    --blackGray : #FEECEC;
+}
+
+body{
+    background-color: var(--whiteGray);
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+main{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.left,.right{
+    padding: 0 10rem 0 10rem;
+    height: 100%;
+}
+
+
