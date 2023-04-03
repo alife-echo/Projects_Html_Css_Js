@@ -31,6 +31,10 @@ main{
     width: 40rem;
     box-shadow: 0px 0px 18px 3px rgba(0,0,0,0.17);
     border-radius:1.2rem ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .playListContainer{
     width: 35rem;
@@ -51,6 +55,66 @@ main{
     font-weight: 500;
     font-size: 2rem;
 }
+.controlsMusic{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2rem;
+}
+.imgStyle{
+    border-radius: 100%;
+    width: 75%;
+    border: 8px solid #F4DEDC;
+}
+.controls{
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 37%;
+   
+}
+.padd{
+    padding: 0 5rem 0 5rem;
+}
+.btnStyle{
+    width: 15rem;
+    cursor: pointer;
 
+}
+.btnStyle:hover{
+    transform: scale(1.2);
+    transition: 300ms all ease;
+}
 
+.btnAlter{
+    width: 5rem;
+}
+#stateMusic{
+   border-radius: 100%;
+}
+#duration{
+    padding-top: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 2rem;
+}
+.controlsAlterMusic{
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    background-color: var(--whiteGray);   
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10rem;
+    box-shadow: 0px 0px 18px 3px rgba(0,0,0,0.17);
+}
 
+.btnAlter{
+    cursor: pointer;
+}
+.btnAlter:hover{
+    transform: scale(1.2);
+    transition: 300ms all ease;
+}
