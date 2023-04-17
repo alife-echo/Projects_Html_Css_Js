@@ -90,7 +90,7 @@ main{
 .btnAlter{
     width: 5rem;
 }
-#stateMusic{
+#btnStateMusic{
    border-radius: 100%;
 }
 #duration{
