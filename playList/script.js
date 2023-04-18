@@ -6,6 +6,8 @@ let musics = [
     {name:'Epilogue Main Theme ',author:'Hans Zimmer',srcAudio:'./themes/crisisEpilogue.mp3',srcImg:'./imgs/prophet.jpg'},
     {name:'Forest Swords',author:'Hood',srcAudio:'./themes/forestSwords.mp3',srcImg:'./imgs/shay.jpg'}
 ]
+let show = false
+let imgState =  document.querySelector('#btnStateMusic')
 //new Audio(url)
 /*
 play(): reproduz o áudio.
@@ -13,9 +15,11 @@ pause(): pausa o áudio.
 currentTime: define ou retorna a posição atual do áudio em segundos.
 duration: retorna a duração total do áudio em segundos.
 */
-window.onload = ()=> 
-{
+window.onload = ()=> {
 let containerMusics = document.querySelector('.playListContainer')
+if(show === false){
+  imgState.src = './imgs/play-button.jpg'
+}
  musics.map(item => {
     let imgMusic = document.createElement('img')
     let itemMusic = document.createElement('div')
@@ -38,7 +42,7 @@ let containerMusics = document.querySelector('.playListContainer')
     infoMusic.appendChild(authorMusic)  
     containerMusics.appendChild(itemMusic)
  })
-        
+  
    
 }
 
@@ -46,6 +50,13 @@ document.querySelector("#btnBackMusic").addEventListener('click',()=>{
 })
 
 document.querySelector("#btnStateMusic").addEventListener('click',()=>{
+    let state = !show
+    if(state === true){
+        imgState.src = './imgs/pause-button.jpg'
+    }
+    else if (state === false){
+        imgState.src = './imgs/play-button.jpg'
+    }
 })
 
 document.querySelector("#btnNextMusic").addEventListener('click',()=>{
