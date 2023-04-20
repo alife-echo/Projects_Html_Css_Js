@@ -63,7 +63,60 @@ if(show === false){
           
               // Criar uma nova instância de áudio para a nova música
               audioPlayer = new Audio(themes[i].getAttribute('song'));
+              let context = new AudioContext();
+              let src = context.createMediaElementSource(audioPlayer);
+              let analyser = context.createAnalyser();
+          
+              let canvas = document.getElementById("canvas");
+              canvas.width = window.innerWidth;
+              canvas.height = window.innerHeight;
+              let ctx = canvas.getContext("2d");
+          
+              src.connect(analyser);
+              analyser.connect(context.destination);
+          
+              analyser.fftSize = 256;
+          
+              let bufferLength = analyser.frequencyBinCount;
+              console.log(bufferLength);
+          
+              let dataArray = new Uint8Array(bufferLength);
+          
+              let WIDTH = canvas.width;
+              let HEIGHT = canvas.height;
+          
+              let barWidth = (WIDTH / bufferLength) * 2.5;
+              let barHeight;
+              let x = 0;
+          
+              function renderFrame() {
+                requestAnimationFrame(renderFrame);
+          
+                x = 0;
+          
+                analyser.getByteFrequencyData(dataArray);
+          
+                ctx.fillStyle = "#FEEDED";
+                ctx.fillRect(0, 0, WIDTH, HEIGHT);
+          
+                for (let i = 0; i < bufferLength; i++) {
+                  barHeight = dataArray[i];
+                  
+                  let r = barHeight + (25 * (i/bufferLength));
+                  let g = 250 * (i/bufferLength);
+                  let b = 50;
+          
+                  ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+                  ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+          
+                  x += barWidth + 1;
+                }
+              }
+          
               audioPlayer.play();
+              renderFrame();
+            
+     
          })
     }
     
