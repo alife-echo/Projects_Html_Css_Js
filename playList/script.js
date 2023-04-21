@@ -7,18 +7,22 @@ let musics = [
     {name:'Forest Swords',author:'Hood',srcAudio:'./themes/forestSwords.mp3',srcImg:'./imgs/shay.jpg'}
 ]
 let show = false
+let audioPlayer = null
 let imgState =  document.querySelector('#btnStateMusic')
 let titleMusic = document.querySelector('#titleMusic')
 let authorMusic = document.querySelector('#detailsMusic')
 let imgAlbum = document.querySelector('#imgMusicShow')
-let audioPlayer = null
-//new Audio(url)
-/*
-play(): reproduz o áudio.
-pause(): pausa o áudio.
-currentTime: define ou retorna a posição atual do áudio em segundos.
-duration: retorna a duração total do áudio em segundos.
-*/
+let themes = document.getElementsByClassName('itemMusic')
+
+
+
+
+
+
+
+
+
+
 window.onload = ()=> {
 let containerMusics = document.querySelector('.playListContainer')
 if(show === false){
@@ -49,18 +53,20 @@ if(show === false){
         containerMusics.appendChild(itemMusic)
     })
     //console.log(themes[i].getAttribute('song'))
-    let themes = document.getElementsByClassName('itemMusic')
+
     for(let i = 0 ; i<themes.length;i++){
          themes[i].addEventListener('click',(e)=> {
            let songTarget = e.target.closest('.itemMusic')
             titleMusic.innerHTML = songTarget.children[1].children[0].textContent
             authorMusic.innerHTML = songTarget.children[1].children[1].textContent
             imgAlbum.src =  songTarget.children[0].src
-
+            for(let j = 0; j<themes.length;j++){
+               themes[j].classList.remove('shadow')
+            }
+            songTarget.classList.add('shadow')
             if (audioPlayer) {
                 audioPlayer.pause();
               }
-          
               // Criar uma nova instância de áudio para a nova música
               audioPlayer = new Audio(themes[i].getAttribute('song'));
               let context = new AudioContext();
@@ -112,15 +118,25 @@ if(show === false){
                   x += barWidth + 1;
                 }
               }
-          
+    
               audioPlayer.play();
               renderFrame();
+              show = true
+              if(show == true){
+                imgState.src = './imgs/pause-button.jpg'
+              }
+             
             
      
          })
     }
     
 }
+
+
+
+
+
 
 
 
@@ -131,15 +147,23 @@ document.querySelector("#btnStateMusic").addEventListener('click',()=>{
     let state = !show
     if(state === true){
         imgState.src = './imgs/pause-button.jpg'
+        audioPlayer.play()
+      
     }
     else if (state === false){
         imgState.src = './imgs/play-button.jpg'
+        audioPlayer.pause()
    
     }
     show = state;
 })
 
 document.querySelector("#btnNextMusic").addEventListener('click',()=>{
+  for(let i = 0; i<musics.length;i++){
+     if((audioPlayer.src).replace('http://127.0.0.1:5500','.') == musics[i].srcAudio){
+            
+     }
+  }
 })
 
 document.querySelector("#btnVolumeUp").addEventListener('click',()=>{
@@ -149,3 +173,16 @@ document.querySelector("#btnLoop").addEventListener('click',()=>{
 
 document.querySelector("#btnVolumeDown").addEventListener('click',()=>{
 })
+
+
+
+
+
+
+//new Audio(url)
+/*
+play(): reproduz o áudio.
+pause(): pausa o áudio.
+currentTime: define ou retorna a posição atual do áudio em segundos.
+duration: retorna a duração total do áudio em segundos.
+*/
