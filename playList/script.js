@@ -15,14 +15,6 @@ let imgAlbum = document.querySelector('#imgMusicShow')
 let themes = document.getElementsByClassName('itemMusic')
 
 
-
-
-
-
-
-
-
-
 window.onload = ()=> {
 let containerMusics = document.querySelector('.playListContainer')
 if(show === false){
@@ -68,6 +60,7 @@ if(show === false){
                 audioPlayer.pause();
               }
               // Criar uma nova instância de áudio para a nova música
+              getSeconds()
               audioPlayer = new Audio(themes[i].getAttribute('song'));
               let context = new AudioContext();
               let src = context.createMediaElementSource(audioPlayer);
@@ -116,10 +109,12 @@ if(show === false){
                   ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
           
                   x += barWidth + 1;
+                
                 }
               }
-    
+             
               audioPlayer.play();
+       
               renderFrame();
               show = true
               if(show == true){
@@ -132,12 +127,6 @@ if(show === false){
     }
     
 }
-
-
-
-
-
-
 
 
 document.querySelector("#btnBackMusic").addEventListener('click',()=>{
@@ -167,16 +156,43 @@ document.querySelector("#btnNextMusic").addEventListener('click',()=>{
 })
 
 document.querySelector("#btnVolumeUp").addEventListener('click',()=>{
+  if (audioPlayer.volume < 1.0) {
+    audioPlayer.volume += 0.2;
+
+  }
 })
 document.querySelector("#btnLoop").addEventListener('click',()=>{
 })
 
 document.querySelector("#btnVolumeDown").addEventListener('click',()=>{
+  if (audioPlayer.volume > 0.0) {
+    console.log(audioPlayer.duration)
+    audioPlayer.volume -= 0.2;
+  }
 })
 
-
-
-
+function getSeconds(){
+setInterval(function() {
+  let count = document.querySelector('#duration')
+  var segundosAtuais = Math.floor(audioPlayer.currentTime);
+  let i = 0
+  let j = 0
+  //var segundosRestantes = Math.floor(audioPlayer.duration - audioPlayer.currentTime);
+  console.log(segundosAtuais)
+  if(segundosAtuais <= 9){
+    count.innerHTML = `${i}${j}:0` + segundosAtuais
+  }
+  else if (segundosAtuais > 9 && segundosAtuais <= 60){
+    count.innerHTML = `${i}${j}:` + segundosAtuais
+  }
+  else if (segundosAtuais > 60){
+  j++
+  segundosAtuais = 0
+  count.innerHTML = `${i}${j}:00`
+}
+ 
+}, 1000);
+}
 
 
 //new Audio(url)
