@@ -45,8 +45,6 @@ if(show === false){
         infoMusic.appendChild(authorMusic)
         containerMusics.appendChild(itemMusic)
     })
-    //console.log(themes[i].getAttribute('song'))
-
     for(let i = 0 ; i<themes.length;i++){
          themes[i].addEventListener('click',(e)=> {
            let songTarget = e.target.closest('.itemMusic')
@@ -66,9 +64,8 @@ if(show === false){
                 document.querySelector('#btnLoop').classList.remove('borderSelect');
                 loop = false
               }
-            
-              // Criar uma nova instância de áudio para a nova música
               getSeconds()
+   
               audioPlayer = new Audio(themes[i].getAttribute('song'));
               let context = new AudioContext();
               let src = context.createMediaElementSource(audioPlayer);
@@ -120,9 +117,10 @@ if(show === false){
                 
                 }
               }
-           
+      
               audioPlayer.play();
               renderFrame();
+  
               show = true
               if(show == true){
                 imgState.src = './imgs/pause-button.jpg'
@@ -132,6 +130,9 @@ if(show === false){
     }
     
 }
+
+
+
 
 
 document.querySelector("#btnBackMusic").addEventListener('click',()=>{
@@ -189,22 +190,11 @@ document.querySelector("#btnVolumeDown").addEventListener('click',()=>{
 function getSeconds(){
   setInterval(function() {
       let count = document.querySelector('#duration')
-      var segundosAtuais = Math.floor(audioPlayer.currentTime);
-      let i = 0
-      let j = 0
-      //var segundosRestantes = Math.floor(audioPlayer.duration - audioPlayer.currentTime);
-      console.log(segundosAtuais)
-      if(segundosAtuais <= 9){
-        count.innerHTML = `${i}${j}:0` + segundosAtuais
-      }
-      else if (segundosAtuais > 9 && segundosAtuais <= 60){
-        count.innerHTML = `${i}${j}:` + segundosAtuais
-      }
-      else if (segundosAtuais > 60){
-      j++
-      segundosAtuais = 0
-      count.innerHTML = `${i}${j}:00`
-  }
+      let secondsNow = Math.floor(audioPlayer.currentTime);
+      let minutes = Math.floor(secondsNow / 60);
+      let seconds =  secondsNow % 60;
+      var contadorFormatado = minutes.toString().padStart(2, '0') + ':' + seconds .toString().padStart(2, '0');
+      count.innerHTML = contadorFormatado
   
   }, 1000);
 }
