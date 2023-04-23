@@ -9,6 +9,7 @@ html{
     font-size: 62.5%;
     --whiteGray : #FEEDED;
     --blackGray : #FEECEC;
+    --bluePink : #0DA2EC;
 }
 
 body{
@@ -94,6 +95,7 @@ main{
 
 .btnAlter{
     width: 5rem;
+    transition: 300ms all ease;
 }
 #btnStateMusic{
    border-radius: 100%;
@@ -169,6 +171,10 @@ main{
 	-webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	        animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
+.btnAlter:active,.btnStyle:active{
+     transform: translate(4px);
+     transition: 300ms all ease;
+}
 #canvas {
     position: fixed;
     left: 0;
@@ -194,4 +200,9 @@ main{
 .shadow{
     transition: 300ms all ease;
     box-shadow: 0px 0px 18px 3px rgba(0,0,0,0.17);
+}
+.borderSelect{
+    transition: 300ms all ease;
+    border: 5px solid #6c5ce7;
+    border-radius: 50%;
 }

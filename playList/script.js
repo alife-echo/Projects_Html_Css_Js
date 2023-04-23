@@ -8,6 +8,7 @@ let musics = [
 ]
 let show = false
 let audioPlayer = null
+let loop = false
 let imgState =  document.querySelector('#btnStateMusic')
 let titleMusic = document.querySelector('#titleMusic')
 let authorMusic = document.querySelector('#detailsMusic')
@@ -54,11 +55,18 @@ if(show === false){
             imgAlbum.src =  songTarget.children[0].src
             for(let j = 0; j<themes.length;j++){
                themes[j].classList.remove('shadow')
+               
             }
             songTarget.classList.add('shadow')
             if (audioPlayer) {
                 audioPlayer.pause();
+            
               }
+            if (document.querySelector('#btnLoop').classList.contains('borderSelect')) {
+                document.querySelector('#btnLoop').classList.remove('borderSelect');
+                loop = false
+              }
+            
               // Criar uma nova instância de áudio para a nova música
               getSeconds()
               audioPlayer = new Audio(themes[i].getAttribute('song'));
@@ -112,16 +120,13 @@ if(show === false){
                 
                 }
               }
-             
+           
               audioPlayer.play();
-       
               renderFrame();
               show = true
               if(show == true){
                 imgState.src = './imgs/pause-button.jpg'
               }
-             
-            
      
          })
     }
@@ -162,6 +167,16 @@ document.querySelector("#btnVolumeUp").addEventListener('click',()=>{
   }
 })
 document.querySelector("#btnLoop").addEventListener('click',()=>{
+    let stateMusic = !loop
+   if(stateMusic === true){
+      audioPlayer.loop = true
+      document.querySelector('#btnLoop').classList.add('borderSelect') 
+   }
+   else if (stateMusic == false){
+      audioPlayer.loop = false
+      document.querySelector('#btnLoop').classList.remove('borderSelect')
+   }
+   loop = stateMusic
 })
 
 document.querySelector("#btnVolumeDown").addEventListener('click',()=>{
@@ -172,26 +187,26 @@ document.querySelector("#btnVolumeDown").addEventListener('click',()=>{
 })
 
 function getSeconds(){
-setInterval(function() {
-  let count = document.querySelector('#duration')
-  var segundosAtuais = Math.floor(audioPlayer.currentTime);
-  let i = 0
-  let j = 0
-  //var segundosRestantes = Math.floor(audioPlayer.duration - audioPlayer.currentTime);
-  console.log(segundosAtuais)
-  if(segundosAtuais <= 9){
-    count.innerHTML = `${i}${j}:0` + segundosAtuais
+  setInterval(function() {
+      let count = document.querySelector('#duration')
+      var segundosAtuais = Math.floor(audioPlayer.currentTime);
+      let i = 0
+      let j = 0
+      //var segundosRestantes = Math.floor(audioPlayer.duration - audioPlayer.currentTime);
+      console.log(segundosAtuais)
+      if(segundosAtuais <= 9){
+        count.innerHTML = `${i}${j}:0` + segundosAtuais
+      }
+      else if (segundosAtuais > 9 && segundosAtuais <= 60){
+        count.innerHTML = `${i}${j}:` + segundosAtuais
+      }
+      else if (segundosAtuais > 60){
+      j++
+      segundosAtuais = 0
+      count.innerHTML = `${i}${j}:00`
   }
-  else if (segundosAtuais > 9 && segundosAtuais <= 60){
-    count.innerHTML = `${i}${j}:` + segundosAtuais
-  }
-  else if (segundosAtuais > 60){
-  j++
-  segundosAtuais = 0
-  count.innerHTML = `${i}${j}:00`
-}
- 
-}, 1000);
+  
+  }, 1000);
 }
 
 
