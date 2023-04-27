@@ -16,7 +16,7 @@ let imgAlbum = document.querySelector('#imgMusicShow')
 let themes = document.getElementsByClassName('itemMusic')
 
 
-window.onload = ()=> {
+window.addEventListener('load',()=> {
 let containerMusics = document.querySelector('.playListContainer')
 if(show === false){
   imgState.src = './imgs/play-button.jpg'
@@ -45,94 +45,129 @@ if(show === false){
         infoMusic.appendChild(authorMusic)
         containerMusics.appendChild(itemMusic)
     })
-    for(let i = 0 ; i<themes.length;i++){
-         themes[i].addEventListener('click',(e)=> {
-           let songTarget = e.target.closest('.itemMusic')
-            titleMusic.innerHTML = songTarget.children[1].children[0].textContent
-            authorMusic.innerHTML = songTarget.children[1].children[1].textContent
-            imgAlbum.src =  songTarget.children[0].src
-            for(let j = 0; j<themes.length;j++){
-               themes[j].classList.remove('shadow')
-               
-            }
-            songTarget.classList.add('shadow')
-            if (audioPlayer) {
-                audioPlayer.pause();
-            
-              }
-            if (document.querySelector('#btnLoop').classList.contains('borderSelect')) {
-                document.querySelector('#btnLoop').classList.remove('borderSelect');
-                loop = false
-              }
-              getSeconds()
-   
-              audioPlayer = new Audio(themes[i].getAttribute('song'));
-              let context = new AudioContext();
-              let src = context.createMediaElementSource(audioPlayer);
-              let analyser = context.createAnalyser();
-          
-              let canvas = document.getElementById("canvas");
-              canvas.width = window.innerWidth;
-              canvas.height = window.innerHeight;
-              let ctx = canvas.getContext("2d");
-          
-              src.connect(analyser);
-              analyser.connect(context.destination);
-          
-              analyser.fftSize = 256;
-          
-              let bufferLength = analyser.frequencyBinCount;
-              console.log(bufferLength);
-          
-              let dataArray = new Uint8Array(bufferLength);
-          
-              let WIDTH = canvas.width;
-              let HEIGHT = canvas.height;
-          
-              let barWidth = (WIDTH / bufferLength) * 2.5;
-              let barHeight;
-              let x = 0;
-          
-              function renderFrame() {
-                requestAnimationFrame(renderFrame);
-          
-                x = 0;
-          
-                analyser.getByteFrequencyData(dataArray);
-          
-                ctx.fillStyle = "#FEEDED";
-                ctx.fillRect(0, 0, WIDTH, HEIGHT);
-          
-                for (let i = 0; i < bufferLength; i++) {
-                  barHeight = dataArray[i];
-                  
-                  let r = barHeight + (25 * (i/bufferLength));
-                  let g = 250 * (i/bufferLength);
-                  let b = 50;
-          
-                  ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
-                  ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
-          
-                  x += barWidth + 1;
-                
-                }
-              }
-      
-              audioPlayer.play();
-              renderFrame();
-  
-              show = true
-              if(show == true){
-                imgState.src = './imgs/pause-button.jpg'
-              }
-     
-         })
-    }
     
+    choiceThemeClicked(themes,'')
+})
+
+
+function choiceThemeClicked (themes = '') {
+  for(let i = 0 ; i<themes.length;i++){
+    themes[i].addEventListener('click',(e)=> {
+      let songTarget = e.target.closest('.itemMusic')
+       updateMusicEvent(songTarget,'')
+       shadowSongClicked(themes,songTarget)
+       dispathLoopEventClick(document.querySelector('#btnLoop'))
+       stopMusicAfterChoiceOtherMusic(audioPlayer)
+       getSeconds()
+ 
+       audioPlayer = new Audio(themes[i].getAttribute('song'));
+       renderFrame(audioPlayer)
+  
+      
+       audioPlayer.play();
+
+       show = true
+       if(show == true){
+           imgState.src = './imgs/pause-button.jpg'
+        }
+
+    })
+}
+
+}
+
+function renderFrame(audioPlayer) {
+  let context = new AudioContext();
+  let src = context.createMediaElementSource(audioPlayer);
+  let analyser = context.createAnalyser();
+
+  let canvas = document.getElementById("canvas");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let ctx = canvas.getContext("2d");
+
+  src.connect(analyser);
+  analyser.connect(context.destination);
+
+  analyser.fftSize = 256;
+
+  let bufferLength = analyser.frequencyBinCount;
+
+
+  let dataArray = new Uint8Array(bufferLength);
+
+  let WIDTH = canvas.width;
+  let HEIGHT = canvas.height;
+
+  let barWidth = (WIDTH / bufferLength) * 2.5;
+  let barHeight;
+  let x = 0;
+
+  function draw() {
+    requestAnimationFrame(draw);
+
+    x = 0;
+
+    analyser.getByteFrequencyData(dataArray);
+
+    ctx.fillStyle = "#FEEDED";
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+    for (let i = 0; i < bufferLength; i++) {
+      barHeight = dataArray[i]; 
+      
+      let r = barHeight + (25 * (i/bufferLength));
+      let g = 250 * (i/bufferLength);
+      let b = 50;
+
+      ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+      ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+
+      x += barWidth + 1;
+    
+    }
+  }
+
+  draw();
+}
+
+
+function dispathLoopEventClick(themeSelect){
+  if (themeSelect.classList.contains('borderSelect')) {
+    themeSelect.classList.remove('borderSelect');
+    loop = false
+  }
+}
+
+function stopMusicAfterChoiceOtherMusic(audioPlayer){
+  if (audioPlayer) {
+    audioPlayer.pause();            
+  }
+}
+
+
+function shadowSongClicked (themes,songTarget){
+    for(let j = 0; j<themes.length;j++){
+      themes[j].classList.remove('shadow')
+      
+  }
+      songTarget.classList.add('shadow')
 }
 
 
 
+function updateMusicEvent(songTarget = '' ,object=''){
+  if(songTarget !== ''){
+    titleMusic.innerHTML = songTarget.children[1].children[0].textContent
+    authorMusic.innerHTML = songTarget.children[1].children[1].textContent
+    imgAlbum.src =  songTarget.children[0].src
+  }
+  else if( object != ''){
+     titleMusic.innerHTML = object.name
+     authorMusic.innerHTML = object.author
+     imgAlbum.src = object.srcImg
+  }   
+}
 
 
 document.querySelector("#btnBackMusic").addEventListener('click',()=>{
@@ -154,9 +189,14 @@ document.querySelector("#btnStateMusic").addEventListener('click',()=>{
 })
 
 document.querySelector("#btnNextMusic").addEventListener('click',()=>{
+  stopMusicAfterChoiceOtherMusic(audioPlayer)
   for(let i = 0; i<musics.length;i++){
      if((audioPlayer.src).replace('http://127.0.0.1:5500','.') == musics[i].srcAudio){
-            
+            audioPlayer = new Audio(musics[i + 1].srcAudio)
+            renderFrame(audioPlayer)
+            audioPlayer.play()
+            updateMusicEvent('',musics[i + 1])
+            break
      }
   }
 })
@@ -182,7 +222,6 @@ document.querySelector("#btnLoop").addEventListener('click',()=>{
 
 document.querySelector("#btnVolumeDown").addEventListener('click',()=>{
   if (audioPlayer.volume > 0.0) {
-    console.log(audioPlayer.duration)
     audioPlayer.volume -= 0.2;
   }
 })
@@ -195,9 +234,20 @@ function getSeconds(){
       let seconds =  secondsNow % 60;
       var contadorFormatado = minutes.toString().padStart(2, '0') + ':' + seconds .toString().padStart(2, '0');
       count.innerHTML = contadorFormatado
-  
+      if(secondsNow === Math.floor(audioPlayer.duration)){
+        if(loop === true){
+          imgState.src = './imgs/pause-button.jpg'
+        }
+        else{
+          imgState.src = './imgs/play-button.jpg'
+        }
+        
+     }
+      return contadorFormatado
+   
   }, 1000);
 }
+
 
 
 //new Audio(url)
