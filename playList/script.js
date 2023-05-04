@@ -4,7 +4,8 @@ let musics = [
     {name:'Make It Bun Dem',author:'Damian Marley',srcAudio:'./themes/makeItBun.mp3',srcImg:'./imgs/vaas.jpg'},
     {name:'Do I Wanna Know',author:'Arctic Monkeys',srcAudio:'./themes/doIWannaKnow.mp3',srcImg:'./imgs/alex.jpg'},
     {name:'Epilogue Main Theme ',author:'Hans Zimmer',srcAudio:'./themes/crisisEpilogue.mp3',srcImg:'./imgs/prophet.jpg'},
-    {name:'Forest Swords',author:'Hood',srcAudio:'./themes/forestSwords.mp3',srcImg:'./imgs/shay.jpg'}
+    {name:'Forest Swords',author:'Hood',srcAudio:'./themes/forestSwords.mp3',srcImg:'./imgs/shay.jpg'},
+   //{name:'Matagal',author:'CarlinhosBrow',srcAudio:'./themes/carlinhosBrow.mp3',srcImg:'./imgs/browCarlinhos.png'}
 ]
 let show = false
 let audioPlayer = null
@@ -48,6 +49,10 @@ if(show === false){
     
     choiceThemeClicked(themes,'')
 })
+
+
+
+
 
 
 function choiceThemeClicked (themes = '') {
@@ -154,7 +159,27 @@ function shadowSongClicked (themes,songTarget){
       songTarget.classList.add('shadow')
 }
 
-
+function toggleMusic (alter){
+  const currentMusicIndex = musics.findIndex(music => (audioPlayer.src).replace('http://127.0.0.1:5500', '.') == music.srcAudio);
+  if(alter === 'nextMusic'){
+    stopMusicAfterChoiceOtherMusic(audioPlayer);
+    if (currentMusicIndex + 1 < musics.length) {
+      audioPlayer = new Audio(musics[currentMusicIndex + 1].srcAudio);
+      renderFrame(audioPlayer);
+      audioPlayer.play();
+      updateMusicEvent('', musics[currentMusicIndex + 1]);
+    }
+  }
+  else if(alter === 'backMusic'){
+    stopMusicAfterChoiceOtherMusic(audioPlayer);
+    if (currentMusicIndex - 1 >= 0 ) {
+      audioPlayer = new Audio(musics[currentMusicIndex - 1].srcAudio);
+      renderFrame(audioPlayer);
+      audioPlayer.play();
+      updateMusicEvent('', musics[currentMusicIndex - 1]);
+    }
+  }
+}
 
 function updateMusicEvent(songTarget = '' ,object=''){
   if(songTarget !== ''){
@@ -169,8 +194,11 @@ function updateMusicEvent(songTarget = '' ,object=''){
   }   
 }
 
-
+//6
+// 3 - 1  < 6
+//
 document.querySelector("#btnBackMusic").addEventListener('click',()=>{
+   toggleMusic('backMusic')
 })
 
 document.querySelector("#btnStateMusic").addEventListener('click',()=>{
@@ -188,19 +216,9 @@ document.querySelector("#btnStateMusic").addEventListener('click',()=>{
     show = state;
 })
 
-document.querySelector("#btnNextMusic").addEventListener('click',()=>{
-  stopMusicAfterChoiceOtherMusic(audioPlayer)
-  for(let i = 0; i<musics.length;i++){
-     if((audioPlayer.src).replace('http://127.0.0.1:5500','.') == musics[i].srcAudio){
-            audioPlayer = new Audio(musics[i + 1].srcAudio)
-            renderFrame(audioPlayer)
-            audioPlayer.play()
-            updateMusicEvent('',musics[i + 1])
-            break
-     }
-  }
-})
-
+document.querySelector("#btnNextMusic").addEventListener('click', () => {
+   toggleMusic('nextMusic')
+});
 document.querySelector("#btnVolumeUp").addEventListener('click',()=>{
   if (audioPlayer.volume < 1.0) {
     audioPlayer.volume += 0.2;
@@ -221,9 +239,12 @@ document.querySelector("#btnLoop").addEventListener('click',()=>{
 })
 
 document.querySelector("#btnVolumeDown").addEventListener('click',()=>{
-  if (audioPlayer.volume > 0.0) {
+  if (audioPlayer.volume >= 0.2) {
     audioPlayer.volume -= 0.2;
+  } else {
+    audioPlayer.volume = 0;
   }
+  
 })
 
 function getSeconds(){
