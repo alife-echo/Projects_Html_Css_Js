@@ -170,30 +170,33 @@ function getTargetToggleMusic(){
 
 function toggleMusic (alter){
   let currentMusicIndex = musics.findIndex(music => (audioPlayer.src).replace('http://127.0.0.1:5500', '.') == music.srcAudio);
+  imgState.src = './imgs/pause-button.jpg'
+  stopMusicAfterChoiceOtherMusic(audioPlayer);
   if(alter === 'nextMusic'){
-    stopMusicAfterChoiceOtherMusic(audioPlayer);
     if (currentMusicIndex + 1 < musics.length) {
       audioPlayer = new Audio(musics[currentMusicIndex + 1].srcAudio);
       show = true
       renderFrame(audioPlayer);
       audioPlayer.play();
       updateMusicEvent('', musics[currentMusicIndex + 1]);
-      getTargetToggleMusic()
-      imgState.src = './imgs/pause-button.jpg'
+      dispathLoopEventClick(document.querySelector('#btnLoop'))
+    }
+    else{
+      imgState.src = './imgs/play-button.jpg'
     }
   }
   else if(alter === 'backMusic'){
-    stopMusicAfterChoiceOtherMusic(audioPlayer);
     if (currentMusicIndex - 1 >= 0 ) {
       audioPlayer = new Audio(musics[currentMusicIndex - 1].srcAudio);
       show = true
       renderFrame(audioPlayer);
       audioPlayer.play();
       updateMusicEvent('', musics[currentMusicIndex - 1]);
-      getTargetToggleMusic()
-      imgState.src = './imgs/pause-button.jpg'
+      dispathLoopEventClick(document.querySelector('#btnLoop'))
     }
   }
+  getTargetToggleMusic()
+  getSeconds()
 }
 
 function updateMusicEvent(songTarget = '' ,object=''){
@@ -263,7 +266,7 @@ document.querySelector("#btnVolumeDown").addEventListener('click',()=>{
 })
 
 function getSeconds(){
-  setInterval(function() {
+ const interval =  setInterval(function() {
       let count = document.querySelector('#duration')
       let secondsNow = Math.floor(audioPlayer.currentTime);
       let minutes = Math.floor(secondsNow / 60);
@@ -275,9 +278,10 @@ function getSeconds(){
           imgState.src = './imgs/pause-button.jpg'
         }
         else{
-          imgState.src = './imgs/play-button.jpg'
+          toggleMusic('nextMusic')
+          clearInterval(interval)
         }
-        
+     
      }
       return contadorFormatado
    
