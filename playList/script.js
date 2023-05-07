@@ -4,8 +4,8 @@ let musics = [
     {name:'Make It Bun Dem',author:'Damian Marley',srcAudio:'./themes/makeItBun.mp3',srcImg:'./imgs/vaas.jpg'},
     {name:'Do I Wanna Know',author:'Arctic Monkeys',srcAudio:'./themes/doIWannaKnow.mp3',srcImg:'./imgs/alex.jpg'},
     {name:'Epilogue Main Theme ',author:'Hans Zimmer',srcAudio:'./themes/crisisEpilogue.mp3',srcImg:'./imgs/prophet.jpg'},
-    //{name:'Forest Swords',author:'Hood',srcAudio:'./themes/forestSwords.mp3',srcImg:'./imgs/shay.jpg'},
-   {name:'Matagal',author:'CarlinhosBrow',srcAudio:'./themes/carlinhosBrow.mp3',srcImg:'./imgs/browCarlinhos.png'}
+    {name:'Forest Swords',author:'Hood',srcAudio:'./themes/forestSwords.mp3',srcImg:'./imgs/shay.jpg'},
+   //{name:'Matagal',author:'CarlinhosBrow',srcAudio:'./themes/carlinhosBrow.mp3',srcImg:'./imgs/browCarlinhos.png'}
 ]
 let show = false
 let audioPlayer = null
@@ -174,20 +174,24 @@ function toggleMusic (alter){
     stopMusicAfterChoiceOtherMusic(audioPlayer);
     if (currentMusicIndex + 1 < musics.length) {
       audioPlayer = new Audio(musics[currentMusicIndex + 1].srcAudio);
+      show = true
       renderFrame(audioPlayer);
       audioPlayer.play();
       updateMusicEvent('', musics[currentMusicIndex + 1]);
       getTargetToggleMusic()
+      imgState.src = './imgs/pause-button.jpg'
     }
   }
   else if(alter === 'backMusic'){
     stopMusicAfterChoiceOtherMusic(audioPlayer);
     if (currentMusicIndex - 1 >= 0 ) {
       audioPlayer = new Audio(musics[currentMusicIndex - 1].srcAudio);
+      show = true
       renderFrame(audioPlayer);
       audioPlayer.play();
       updateMusicEvent('', musics[currentMusicIndex - 1]);
       getTargetToggleMusic()
+      imgState.src = './imgs/pause-button.jpg'
     }
   }
 }
