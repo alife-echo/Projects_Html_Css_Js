@@ -4,8 +4,8 @@ let musics = [
     {name:'Make It Bun Dem',author:'Damian Marley',srcAudio:'./themes/makeItBun.mp3',srcImg:'./imgs/vaas.jpg'},
     {name:'Do I Wanna Know',author:'Arctic Monkeys',srcAudio:'./themes/doIWannaKnow.mp3',srcImg:'./imgs/alex.jpg'},
     {name:'Epilogue Main Theme ',author:'Hans Zimmer',srcAudio:'./themes/crisisEpilogue.mp3',srcImg:'./imgs/prophet.jpg'},
-    {name:'Forest Swords',author:'Hood',srcAudio:'./themes/forestSwords.mp3',srcImg:'./imgs/shay.jpg'},
-   //{name:'Matagal',author:'CarlinhosBrow',srcAudio:'./themes/carlinhosBrow.mp3',srcImg:'./imgs/browCarlinhos.png'}
+    //{name:'Forest Swords',author:'Hood',srcAudio:'./themes/forestSwords.mp3',srcImg:'./imgs/shay.jpg'},
+   {name:'Matagal',author:'CarlinhosBrow',srcAudio:'./themes/carlinhosBrow.mp3',srcImg:'./imgs/browCarlinhos.png'}
 ]
 let show = false
 let audioPlayer = null
@@ -159,8 +159,17 @@ function shadowSongClicked (themes,songTarget){
       songTarget.classList.add('shadow')
 }
 
+function getTargetToggleMusic(){
+  let curretMusic = musics.find(musicsToggle => (audioPlayer.src).replace('http://127.0.0.1:5500', '.') == musicsToggle.srcAudio)
+   for(i = 0; i<themes.length;i++){
+    if(themes[i].children[1].children[0].textContent === curretMusic.name){
+        shadowSongClicked(themes,themes[i])
+    }
+   }
+}
+
 function toggleMusic (alter){
-  const currentMusicIndex = musics.findIndex(music => (audioPlayer.src).replace('http://127.0.0.1:5500', '.') == music.srcAudio);
+  let currentMusicIndex = musics.findIndex(music => (audioPlayer.src).replace('http://127.0.0.1:5500', '.') == music.srcAudio);
   if(alter === 'nextMusic'){
     stopMusicAfterChoiceOtherMusic(audioPlayer);
     if (currentMusicIndex + 1 < musics.length) {
@@ -168,6 +177,7 @@ function toggleMusic (alter){
       renderFrame(audioPlayer);
       audioPlayer.play();
       updateMusicEvent('', musics[currentMusicIndex + 1]);
+      getTargetToggleMusic()
     }
   }
   else if(alter === 'backMusic'){
@@ -177,6 +187,7 @@ function toggleMusic (alter){
       renderFrame(audioPlayer);
       audioPlayer.play();
       updateMusicEvent('', musics[currentMusicIndex - 1]);
+      getTargetToggleMusic()
     }
   }
 }
