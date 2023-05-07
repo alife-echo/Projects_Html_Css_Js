@@ -1,1 +1,1 @@
-![Projeto PlayList](./imgs/playlist.webp)
+![Projeto PlayList](./imgs/bg_project.png)
