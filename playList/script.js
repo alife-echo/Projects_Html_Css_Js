@@ -159,8 +159,13 @@ function shadowSongClicked (themes,songTarget){
       songTarget.classList.add('shadow')
 }
 
+function getRelativeUrl(url) {
+  const baseUrl = window.location.protocol + '//' + window.location.host;
+  return url.replace(baseUrl, '.');
+}
+
 function getTargetToggleMusic(){
-  let curretMusic = musics.find(musicsToggle => (audioPlayer.src).replace('http://127.0.0.1:5500', '.') == musicsToggle.srcAudio)
+  let curretMusic =  musics.find(music => getRelativeUrl(audioPlayer.src) === getRelativeUrl(music.srcAudio))
    for(i = 0; i<themes.length;i++){
     if(themes[i].children[1].children[0].textContent === curretMusic.name){
         shadowSongClicked(themes,themes[i])
@@ -169,7 +174,7 @@ function getTargetToggleMusic(){
 }
 
 function toggleMusic (alter){
-  let currentMusicIndex = musics.findIndex(music => (audioPlayer.src).replace('http://127.0.0.1:5500', '.') == music.srcAudio);
+  let currentMusicIndex =  musics.findIndex(music => getRelativeUrl(audioPlayer.src) === getRelativeUrl(music.srcAudio));
   imgState.src = './imgs/pause-button.jpg'
   stopMusicAfterChoiceOtherMusic(audioPlayer);
   if(alter === 'nextMusic'){
