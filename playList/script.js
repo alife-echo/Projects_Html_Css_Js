@@ -5,7 +5,6 @@ let musics = [
     {name:'Do I Wanna Know',author:'Arctic Monkeys',srcAudio:'./themes/doIWannaKnow.mp3',srcImg:'./imgs/alex.jpg'},
     {name:'Epilogue Main Theme ',author:'Hans Zimmer',srcAudio:'./themes/crisisEpilogue.mp3',srcImg:'./imgs/prophet.jpg'},
     {name:'Forest Swords',author:'Hood',srcAudio:'./themes/forestSwords.mp3',srcImg:'./imgs/shay.jpg'},
-   //{name:'Matagal',author:'CarlinhosBrow',srcAudio:'./themes/carlinhosBrow.mp3',srcImg:'./imgs/browCarlinhos.png'}
 ]
 let show = false
 let audioPlayer = null
